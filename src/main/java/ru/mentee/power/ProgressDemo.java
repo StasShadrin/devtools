@@ -2,6 +2,7 @@ package ru.mentee.power;
 
 public class ProgressDemo {
     public static void main(String[] args) {
+
         var progress = new MenteeProgress("Stas", 1, 7);
 
         System.out.println(progress.summary());
