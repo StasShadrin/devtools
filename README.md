@@ -88,6 +88,50 @@
      git status
      ```
 
+## Правило «git status clean»
+
+1. **Проверка индекса**
+    - Выполнить:
+     ```bash
+     git status
+     ```
+    - Убедиться, что мусор не попадает в изменения
+2. **Проверка .gitignore в соответствии с паттерном**
+
+       #Gradle Wrapper
+       .gradle/
+       build/
+       !gradle/wrapper/gradle-wrapper.jar
+       !gradle/wrapper/gradle-wrapper.properties
+
+       #IntelliJ IDEA
+       .idea/
+       *.iml
+       out/
+3. **Проверьте фильтрацию паттернов (после правки .gitignore)**
+   - Выполнить:
+   ```bash
+     git check-ignore -v .DS_Store || true
+     git check-ignore -v .idea/workspace.xml || true
+    ```
+4. **Удалите мусор из индекса (без удаления с диска)**
+   - Выполнить:
+    ```bash
+     git rm -r --cached .idea build out
+    ```
+5. **Сделайте санитарный коммит и проверьте историю/дифф**
+   - Выполнить:
+   ```bash
+    git commit -m "Очистить репозиторий; обновить .gitignore"
+    git log --oneline -n 1
+    git diff --name-status HEAD~1..HEAD
+   ```
+6. **Проверить по правилу «Перед push: git status clean»**
+
 ## Ссылки
 
-📚 [DVT-2 — Gradle-проект и базовый](https://mentee-power.xl.ru/learn/MCIneBj4KkyH-GIRCspFvA/theory)
+📚 [DVT-1 — Установка JDK и IntelliJ IDEA, первый запуск](https://mentee-power.xl.ru/learn/eZTCGC3TuEW8P6jDvNRFZw/theory)    
+📚 [DVT-2 — Gradle-проект и базовый](https://mentee-power.xl.ru/learn/MCIneBj4KkyH-GIRCspFvA/theory)  
+📚 [DVT-3 — Git Essentials: локальный цикл](https://mentee-power.xl.ru/learn/YkPmAouqvkG_WPo9QL1ZrA/theory)  
+📚 [DVT-4 — GitHub и первый Pull Request](https://mentee-power.xl.ru/learn/A_btRUb8mkOIhdfHpFvh5g/theory)  
+📚 [DVT-5 — Чистый Git‑репозиторий](https://mentee-power.xl.ru/learn/YAyt18jq5Ei8UrJbIjlkVA/theory)  
