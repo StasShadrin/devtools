@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'ru.mentee.power'
@@ -32,6 +34,75 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+checkstyle {
+    toolVersion = '10.12.4'
+    maxErrors = 0
+    maxWarnings = 999
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+jacoco {
+    toolVersion = "0.8.14"
+}
+
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+
+    filter {
+        excludeTestsMatching '*Demo*'
+        excludeTestsMatching '*ProgressDemo*'
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/mentee/power/devtools/progress/ProgressDemo.class',
+                    'ru/mentee/power/devtools/progress/**/ProgressDemo*.class',
+                    '**/*Demo*.class'
+            ])
+        }))
+    }
+}
+
+jacocoTestCoverageVerification {
+    dependsOn jacocoTestReport
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/mentee/power/devtools/progress/ProgressDemo.class',
+                    'ru/mentee/power/devtools/progress/**/ProgressDemo*.class',
+                    '**/*Demo*.class'
+            ])
+        }))
+    }
+
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80
+            }
+        }
+    }
+}
+
+// Интеграция проверок в lifecycle
+check {
+    dependsOn jacocoTestCoverageVerification
+}
+
+run {
+    standardInput = System.in
+    systemProperty "file.encoding", "UTF-8"
 }

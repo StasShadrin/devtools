@@ -1,5 +1,8 @@
 package ru.mentee.power.devtools.progress;
 
+/**
+ * Трекер прогресса для отслеживания выполнения уроков mentee.
+ */
 public class ProgressTracker {
 
     /**
