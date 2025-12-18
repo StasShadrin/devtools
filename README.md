@@ -199,6 +199,8 @@
 Почему: скобки обязательны даже для однострочных блоков.
 Источник: https://google.github.io/styleguide/javaguide.html#s4.1.1-braces-always-used
 
+# CI-пайплайн настроен
+
 ## Ссылки
 
 📚 [DVT-1 — Установка JDK и IntelliJ IDEA, первый запуск](https://mentee-power.xl.ru/learn/eZTCGC3TuEW8P6jDvNRFZw/theory)    
@@ -208,3 +210,4 @@
 📚 [DVT-5 — Чистый Git‑репозиторий](https://mentee-power.xl.ru/learn/YAyt18jq5Ei8UrJbIjlkVA/theory)  
 📚 [DVT-6 — Один цикл и контроль прогресса — освоение Debug](https://mentee-power.xl.ru/learn/sjF69ienA0-9D3WhGYqhuA/theory)  
 📚 [DVT-7 — Checkstyle и культура кода — автоматизация стандартов](https://mentee-power.xl.ru/learn/H-BwIbNy-0uWKVNhmmR_xA/theory)  
+📚 [DVT-8 — GitHub Actions CI — автоматизация проверок при push и PR](https://mentee-power.xl.ru/learn/rMMhPOjJNEeXw-sQmfJYZQ/theory)  
