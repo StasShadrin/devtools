@@ -1,16 +1,20 @@
 package ru.mentee.power.devtools.progress;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Fail.fail;
 
 @DisplayName("Тестирование ProgressTracker")
 class ProgressLoopTest {
 
     @Test
     @DisplayName("Должен корректно вычислить суммарный прогресс когда передан массив mentee")
-    void shouldCalculateTotalProgress_whenMultipleMentees() {
+    void shouldCalculateTotalProgressWhenMultipleMentees() {
         // given - подготовка данных
         ProgressTracker tracker = new ProgressTracker();
         Mentee[] mentees = {
@@ -30,7 +34,7 @@ class ProgressLoopTest {
 
     @Test
     @DisplayName("Должен корректно обработать массив когда все mentee завершили курс")
-    void shouldCalculateTotalProgress_whenAllMenteesCompleted() {
+    void shouldCalculateTotalProgressWhenAllMenteesCompleted() {
         // given
         ProgressTracker tracker = new ProgressTracker();
         Mentee[] mentees = {
@@ -45,5 +49,44 @@ class ProgressLoopTest {
         assertThat(result)
                 .contains("пройдено 24 из 24 уроков")
                 .contains("осталось 0 уроков");
+    }
+
+    @Test
+    @DisplayName("Должен выбросить исключение когда массив mentee равен null")
+    void shouldThrowWhenMenteesIsNull() {
+        ProgressTracker tracker = new ProgressTracker();
+        assertThatThrownBy(() -> tracker.calculateTotalProgress(null))
+                .isInstanceOf(UnsupportedOperationException.class)
+                .hasMessage("Метод calculateTotalProgress ещё не реализован");
+    }
+
+    @Test
+    @DisplayName("Должен выбросить исключение когда массив mentee пустой")
+    void shouldThrowWhenMenteesIsEmpty() {
+        ProgressTracker tracker = new ProgressTracker();
+        assertThatThrownBy(() -> tracker.calculateTotalProgress(new Mentee[0]))
+                .isInstanceOf(UnsupportedOperationException.class)
+                .hasMessage("Метод calculateTotalProgress ещё не реализован");
+    }
+
+    @Test
+    @DisplayName("Должен корректно работать main метод")
+    void shouldWorkMainMethod() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        try {
+            ProgressTracker.class.getDeclaredMethod("main").invoke(null);
+
+            String output = outContent.toString().trim();
+            assertThat(output)
+                    .contains("пройдено 25 из 36 уроков")
+                    .contains("осталось 11 уроков");
+        } catch (Exception e) {
+            fail("Ошибка при вызове main метода: " + e.getMessage());
+        } finally {
+            System.setOut(originalOut);
+        }
     }
 }

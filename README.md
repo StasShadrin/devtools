@@ -154,6 +154,51 @@
 - Если тесты красные: откройте вывод теста, найдите AssertionError, скорректируйте метод
 - Если Debug не останавливается: убедитесь, что breakpoint установлен (красный кружок)  
 
+## Кодстайл-гайд проекта devtools
+
+Проект следует правилам Google Java Style Guide с адаптацией.
+Автоматическая проверка: ./gradlew checkstyleMain
+
+### 1. Именование методов: camelCase
+
+До:    public void add_student(Student s) { }
+После: public void addStudent(Student student) { }
+
+Почему: Java Convention требует camelCase для методов.
+Источник: https://google.github.io/styleguide/javaguide.html#s5.3-camel-case
+
+### 2. Пробелы после if/for/while
+
+До:    if(condition) {
+После: if (condition) {
+
+Почему: улучшает читаемость, отделяет ключевое слово от выражения.
+Источник: Oracle Code Conventions — Whitespace
+
+### 3. Длина строки: максимум 120 символов
+
+До:    public List getStudentsFromSpecificCityWithVeryLongName...
+После: public List getStudentsByCity(String city) {
+
+Почему: длинные строки затрудняют чтение в редакторе и при code review.
+Источник: https://google.github.io/styleguide/javaguide.html#s4.4-column-limit
+
+### 4. Порядок импортов
+
+До:    import java.util.List; import java.util.ArrayList; import java.io.File;
+После: import java.io.File; import java.util.ArrayList; import java.util.List;
+
+Почему: алфавитный порядок упрощает поиск импортов.
+Источник: IntelliJ IDEA → Code → Optimize Imports
+
+### 5. Фигурные скобки для if
+
+До:    if (condition) doSomething();
+После: if (condition) { doSomething(); }
+
+Почему: скобки обязательны даже для однострочных блоков.
+Источник: https://google.github.io/styleguide/javaguide.html#s4.1.1-braces-always-used
+
 ## Ссылки
 
 📚 [DVT-1 — Установка JDK и IntelliJ IDEA, первый запуск](https://mentee-power.xl.ru/learn/eZTCGC3TuEW8P6jDvNRFZw/theory)    
@@ -162,3 +207,4 @@
 📚 [DVT-4 — GitHub и первый Pull Request](https://mentee-power.xl.ru/learn/A_btRUb8mkOIhdfHpFvh5g/theory)  
 📚 [DVT-5 — Чистый Git‑репозиторий](https://mentee-power.xl.ru/learn/YAyt18jq5Ei8UrJbIjlkVA/theory)  
 📚 [DVT-6 — Один цикл и контроль прогресса — освоение Debug](https://mentee-power.xl.ru/learn/sjF69ienA0-9D3WhGYqhuA/theory)  
+📚 [DVT-7 — Checkstyle и культура кода — автоматизация стандартов](https://mentee-power.xl.ru/learn/H-BwIbNy-0uWKVNhmmR_xA/theory)  
