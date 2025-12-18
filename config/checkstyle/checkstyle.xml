@@ -20,6 +20,12 @@
         <property name="ignorePattern" value="^package.*|^import.*|//|/\*|\*/|@"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="\)\s{2,}\{"/>
+        <property name="message" value="Между ')' и '{' должно быть ровно один пробел"/>
+        <property name="fileExtensions" value="java"/>
+    </module>
+
     <module name="TreeWalker">
 
         <module name="AvoidStarImport"/>
