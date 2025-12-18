@@ -1,5 +1,7 @@
 # devtools — Mentee Progress Tracker
 
+[![Java CI with Checkstyle and JaCoCo](https://github.com/StasShadrin/devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/StasShadrin/devtools/actions/workflows/ci.yml)
+
 ## Quick Start
 
 1. Убедись, что установлены **JDK 25** и **Gradle** (рекомендуется использовать Wrapper).
