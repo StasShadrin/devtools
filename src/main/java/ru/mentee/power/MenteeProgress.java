@@ -16,6 +16,7 @@ public record MenteeProgress(String menteeName, int sprintNumber, int plannedHou
      *
      * @return true если mentee готов к спринту
      */
+    // TODO:
     public boolean readyForSprint() {
         return plannedHoursPerWeek >= 3;
     }
