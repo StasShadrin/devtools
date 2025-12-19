@@ -21,7 +21,6 @@ public record Mentee(String name,
      */
     public Mentee {
         if (completedLessons < 0 || totalLessons <= 0 || completedLessons > totalLessons) {
-            // закомментировал строчку для проведения само-ревью
             throw new IllegalArgumentException("Некорректные значения прогресса");
         }
     }

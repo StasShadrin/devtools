@@ -10,7 +10,6 @@ public class ProgressDemo {
         System.out.println(progress.summary());
         if (progress.readyForSprint()) {
             System.out.println("Status: sprint ready");
-            System.out.println("Debug: ...");
         } else {
             System.out.println("Status: backlog first");
         }
